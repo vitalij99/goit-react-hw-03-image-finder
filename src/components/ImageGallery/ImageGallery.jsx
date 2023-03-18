@@ -1,3 +1,4 @@
+import { ButtonLodeMore } from 'components/Button/Button';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { Component } from 'react';
 import style from './ImageGallery.module.css';
@@ -18,14 +19,9 @@ export class ImageGallery extends Component {
                         />
                     ))}
                 </ul>
-                <button
-                    className={style.LoadeMore}
-                    onClick={() => {
-                        getSearchLoad();
-                    }}
-                >
-                    Lode More
-                </button>
+                <ButtonLodeMore getSearchLoad={getSearchLoad}>
+                    Loade More
+                </ButtonLodeMore>
             </>
         );
     }

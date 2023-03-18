@@ -39,3 +39,8 @@ export class Modal extends Component {
         );
     }
 }
+
+Modal.propTypes = {
+    closeModal: PropTypes.func,
+    largeImageURL: PropTypes.string,
+};

@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import style from './ImageGalleryItem.module.css';
+import PropTypes from 'prop-types';
 
 export class ImageGalleryItem extends Component {
     state = {};
@@ -18,3 +19,8 @@ export class ImageGalleryItem extends Component {
         );
     }
 }
+ImageGalleryItem.propTypes = {
+    webformatURL: PropTypes.string,
+    largeImageURL: PropTypes.string,
+    onImageClick: PropTypes.func,
+};
