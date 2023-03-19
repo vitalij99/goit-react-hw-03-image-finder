@@ -11,6 +11,7 @@ export class App extends Component {
         search: '',
         images: [],
         page: 1,
+        maxPage: null,
         isLoading: false,
         error: null,
         modal: {
@@ -24,7 +25,8 @@ export class App extends Component {
         try {
             const mass = await fetchImages(search, 1);
             const images = mass.hits;
-            this.setState({ images });
+            const maxPage = mass.totalHits / 12;
+            this.setState({ images, maxPage });
         } catch (error) {
             this.setState({ error });
         } finally {
@@ -50,7 +52,12 @@ export class App extends Component {
         this.setState({ modal: { largeImageURL: '', openModal: false } });
     };
     render() {
-        const { error, images, isLoading, modal, search } = this.state;
+        const { error, images, isLoading, modal, search, maxPage, page } =
+            this.state;
+        let loadeMore = true;
+        if (page >= maxPage) {
+            loadeMore = false;
+        }
         return (
             <>
                 <SearchBar getSearchToState={this.getSearchToState}></SearchBar>
@@ -64,6 +71,7 @@ export class App extends Component {
                 {images.length > 0 && !isLoading && (
                     <ImageGallery
                         images={images}
+                        loadeMore={loadeMore}
                         getSearchLoad={this.getSearchLoad}
                         onImageClick={this.onImageClick}
                     ></ImageGallery>
